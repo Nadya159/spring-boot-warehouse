@@ -1,8 +1,10 @@
 CREATE DATABASE warehouse;
 
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE IF NOT EXISTS products
 (
-    id SERIAL PRIMARY KEY ,
+    id uuid PRIMARY KEY ,
     name VARCHAR(64) NOT NULL UNIQUE,
     article VARCHAR(64) UNIQUE,
     description VARCHAR(128) NOT NULL UNIQUE,
