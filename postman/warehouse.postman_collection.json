@@ -1,0 +1,165 @@
+{
+	"info": {
+		"_postman_id": "820e05e5-ede8-4768-8b9a-6d0ea15fda03",
+		"name": "warehouse",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33948411"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/api/v1/product/all",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Грецкий орех 500г\",\r\n    \"article\": \"FD-001-505\",\r\n    \"description\": \"Очищенный грецкий орех, упаковка 500г\",\r\n    \"category\": \"FOOD\",\r\n    \"price\": 550.00,\r\n    \"amount\": 25\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/v1/product/all",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/product/all",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"product",
+						"all"
+					]
+				},
+				"description": "Получение списка всех продуктов"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/v1/product/d0ccc151-c58e-4513-8bf2-ca8d4ff9427b",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/product/d0ccc151-c58e-4513-8bf2-ca8d4ff9427b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"product",
+						"d0ccc151-c58e-4513-8bf2-ca8d4ff9427b"
+					]
+				},
+				"description": "Поиск товара по ID"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/v1/product/26f610d1-2ed4-4787-9f45-5f5e0073b72d",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/v1/product/26f610d1-2ed4-4787-9f45-5f5e0073b72d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"product",
+						"26f610d1-2ed4-4787-9f45-5f5e0073b72d"
+					]
+				},
+				"description": "Удаление по ID"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/api/v1/product/d0ccc151-c58e-4513-8bf2-ca8d4ff9427b",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"name\": \"Смартфон Realme 12 PRO PLUS\",\r\n    \"article\": \"DVC-001-317\",\r\n    \"description\": \"Смартфон realme 10 Pro+ NFC 8/256 Гб\",\r\n    \"category\": \"DEVICES\",\r\n    \"price\": 30050.00,\r\n    \"amount\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/product/d0ccc151-c58e-4513-8bf2-ca8d4ff9427b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"product",
+						"d0ccc151-c58e-4513-8bf2-ca8d4ff9427b"
+					]
+				},
+				"description": "Обновление продукта по ID"
+			},
+			"response": []
+		}
+	]
+}
