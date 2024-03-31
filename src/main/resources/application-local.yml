@@ -2,16 +2,21 @@ logging:
   level:
     root: info
   file:
-    name: springData.log
+    name: warehouseApp.log
+
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/warehouse
+    url: jdbc:postgresql://localhost:5432/warehouse
     username: postgres
-    password: erth
+    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
+    generate-ddl: true
+    open-in-view: false
     properties:
       hibernate:
+        enable_lazy_load_no_trans: true
         show_sql: true
         format_sql: true
         hbm2ddl:auto: validate
+        ddl-auto: update

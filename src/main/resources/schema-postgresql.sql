@@ -1,5 +1,3 @@
-CREATE DATABASE warehouse;
-
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE IF NOT EXISTS products
@@ -11,6 +9,6 @@ CREATE TABLE IF NOT EXISTS products
     category VARCHAR(64) NOT NULL UNIQUE,
     price DECIMAL NOT NULL,
     amount INTEGER,
-    created_at DATE,
+    created_at TIMESTAMP,
     modified_amount_at TIMESTAMP
 );
