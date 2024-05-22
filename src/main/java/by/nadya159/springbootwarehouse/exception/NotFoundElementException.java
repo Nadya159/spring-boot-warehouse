@@ -1,6 +1,6 @@
 package by.nadya159.springbootwarehouse.exception;
 
-import by.nadya159.springbootwarehouse.model.entity.Product;
+import by.nadya159.springbootwarehouse.entity.Product;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 

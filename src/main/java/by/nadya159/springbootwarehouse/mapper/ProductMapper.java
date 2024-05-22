@@ -1,8 +1,8 @@
-package by.nadya159.springbootwarehouse.model.mapper;
+package by.nadya159.springbootwarehouse.mapper;
 
-import by.nadya159.springbootwarehouse.model.dto.ProductCreateEditDto;
-import by.nadya159.springbootwarehouse.model.dto.ProductReadDto;
-import by.nadya159.springbootwarehouse.model.entity.Product;
+import by.nadya159.springbootwarehouse.dto.ProductCreateEditDto;
+import by.nadya159.springbootwarehouse.dto.ProductReadDto;
+import by.nadya159.springbootwarehouse.entity.Product;
 import org.mapstruct.Mapper;
 
 /**

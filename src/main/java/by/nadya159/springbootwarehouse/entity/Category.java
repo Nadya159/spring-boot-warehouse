@@ -1,4 +1,4 @@
-package by.nadya159.springbootwarehouse.model.entity;
+package by.nadya159.springbootwarehouse.entity;
 
 /**
  * Перечисление для категорий товаров

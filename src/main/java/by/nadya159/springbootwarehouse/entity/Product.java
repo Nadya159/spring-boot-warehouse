@@ -1,20 +1,22 @@
-package by.nadya159.springbootwarehouse.model.entity;
+package by.nadya159.springbootwarehouse.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
  * Сущность товара в базе данных
  */
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "article")
+@Getter
+@Setter
 @Builder
 @Entity
 @Table(name = "products", schema = "public")
@@ -55,7 +57,7 @@ public class Product implements BaseEntity<UUID>{
      * Цена товара
      */
     @Column(nullable = false)
-    private double price;
+    private BigDecimal price;
 
     /**
      * Количество товара

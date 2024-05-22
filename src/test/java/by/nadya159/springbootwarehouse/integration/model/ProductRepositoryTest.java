@@ -1,14 +1,15 @@
 package by.nadya159.springbootwarehouse.integration.model;
 
 import by.nadya159.springbootwarehouse.integration.annotation.IT;
-import by.nadya159.springbootwarehouse.model.entity.Category;
-import by.nadya159.springbootwarehouse.model.entity.Product;
-import by.nadya159.springbootwarehouse.model.repository.ProductRepository;
+import by.nadya159.springbootwarehouse.entity.Category;
+import by.nadya159.springbootwarehouse.entity.Product;
+import by.nadya159.springbootwarehouse.repository.ProductRepository;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -41,7 +42,7 @@ class ProductRepositoryTest {
                 .article("test-test")
                 .category(Category.FOOD)
                 .description("testing")
-                .price(1001.50)
+                .price(BigDecimal.valueOf(1001.50))
                 .amount(1)
                 .build();
         var productId = productRepository.save(product).getId();

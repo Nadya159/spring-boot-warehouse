@@ -1,8 +1,8 @@
 package by.nadya159.springbootwarehouse.controller;
 
-import by.nadya159.springbootwarehouse.model.dto.ProductCreateEditDto;
-import by.nadya159.springbootwarehouse.model.dto.ProductReadDto;
-import by.nadya159.springbootwarehouse.service.ProductService;
+import by.nadya159.springbootwarehouse.dto.ProductCreateEditDto;
+import by.nadya159.springbootwarehouse.dto.ProductReadDto;
+import by.nadya159.springbootwarehouse.service.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ import java.util.UUID;
 @RequestMapping("/api/v1/product")
 public class ProductController {
 
-    private final ProductService productService;
+    private final ProductServiceImpl productService;
 
     /**
      * Endpoint получения всех товаров

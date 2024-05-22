@@ -1,6 +1,6 @@
-package by.nadya159.springbootwarehouse.model.dto;
+package by.nadya159.springbootwarehouse.dto;
 
-import by.nadya159.springbootwarehouse.model.entity.Product;
+import by.nadya159.springbootwarehouse.entity.Product;
 import jakarta.validation.constraints.*;
 
 /**
