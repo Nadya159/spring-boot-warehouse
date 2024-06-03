@@ -1,12 +1,15 @@
 package by.nadya159.springbootwarehouse.dto;
 
 import by.nadya159.springbootwarehouse.entity.Product;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 /**
- * DTO для создания или изменения сущности {@link Product} (товар)
+ * DTO для изменения сущности {@link Product} (товар)
  */
-public record ProductCreateEditDto(
+public record ProductEditDto(
         @NotBlank(message = "Name cannot be null")
         @Size(min = 3, max = 64,
                 message = "Must be between 3 and 64 characters")
@@ -34,3 +37,4 @@ public record ProductCreateEditDto(
         @PositiveOrZero(message = "Amount should not be less than 0")
         Integer amount) {
 }
+

@@ -85,8 +85,12 @@ public class Product implements BaseEntity<UUID>{
      * Устанавливает дату создания и последнего изменения количества перед созданием товара
      */
     @PrePersist
-    void setDates() {
+    protected void onCreate() {
         this.createdAt = LocalDateTime.now();
+        this.modifiedAmountAt = LocalDateTime.now();
+    }
+    @PreUpdate
+    protected void onUpdate() {
         this.modifiedAmountAt = LocalDateTime.now();
     }
 }

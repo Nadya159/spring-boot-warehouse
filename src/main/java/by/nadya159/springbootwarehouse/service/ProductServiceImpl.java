@@ -1,11 +1,13 @@
 package by.nadya159.springbootwarehouse.service;
 
+import by.nadya159.springbootwarehouse.dto.ProductCreateDto;
+import by.nadya159.springbootwarehouse.dto.ProductEditDto;
 import by.nadya159.springbootwarehouse.exception.NotFoundElementException;
-import by.nadya159.springbootwarehouse.dto.ProductCreateEditDto;
 import by.nadya159.springbootwarehouse.dto.ProductReadDto;
 import by.nadya159.springbootwarehouse.mapper.ProductMapper;
 import by.nadya159.springbootwarehouse.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +20,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
@@ -32,7 +34,7 @@ public class ProductServiceImpl implements ProductService{
      */
     public ProductReadDto findById(UUID id) {
         return productRepository.findById(id)
-                .map(productMapper::toProductDto)
+                .map(productMapper::toProductReadDto)
                 .orElseThrow(() -> new NotFoundElementException("Product with id='%s' not found".formatted(id)));
     }
 
@@ -41,36 +43,36 @@ public class ProductServiceImpl implements ProductService{
      *
      * @return Список всех товаров
      */
-    public List<ProductReadDto> findAll() {
-        return productRepository.findAll()
-                .stream().map(productMapper::toProductDto).toList();
+    public List<ProductReadDto> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable)
+                .stream().map(productMapper::toProductReadDto).toList();
     }
 
     /**
      * Создание нового товара
      *
-     * @param productDto {@link ProductCreateEditDto} товар, который нужно создать
+     * @param productDto {@link ProductCreateDto} товар, который нужно создать
      * @return {@link ProductReadDto} созданный товар
      */
     @Transactional
-    public ProductReadDto create(ProductCreateEditDto productDto) {
-        return productMapper.toProductDto(productRepository.save
+    public ProductReadDto create(ProductCreateDto productDto) {
+        return productMapper.toProductReadDto(productRepository.save
                 (productMapper.toProduct(productDto)));
     }
 
     /**
      * Обновление товара по его идентификатору (UUID)
      *
-     * @param id идентификатор обновляемого продукта
-     * @param productDto {@link ProductCreateEditDto} товар, который нужно создать
+     * @param id         идентификатор обновляемого продукта
+     * @param productDto {@link ProductCreateDto} товар, который нужно создать
      * @return {@link ProductReadDto} созданный товар
      * @throws NotFoundElementException если товар с заданным идентификатором (UUID) не найден
      */
     @Transactional
-    public ProductReadDto update(UUID id, ProductCreateEditDto productDto) {
+    public ProductReadDto update(UUID id, ProductEditDto productDto) {
         var product = productRepository.getReferenceById(id);
-        var updateProduct = productRepository.save(product);
-        return productMapper.toProductDto(updateProduct);
+        var updateProduct = productRepository.save(productMapper.toProduct(productDto));
+        return productMapper.toProductReadDto(updateProduct);
     }
 
     /**
