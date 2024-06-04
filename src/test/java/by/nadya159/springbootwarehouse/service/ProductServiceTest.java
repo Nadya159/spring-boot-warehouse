@@ -35,8 +35,8 @@ class ProductServiceTest {
     @DisplayName("Test create Product in Service layer")
     void createTest() {
         //given
-        Product productToSave = DataUtils.getProductTest1Transient();
-        ProductCreateDto productDtoToSave = productMapper.toProductCreateDto(productToSave);
+        Product productToCreate = DataUtils.getProductTest1Transient();
+        ProductCreateDto productDtoToCreate = productMapper.toProductCreateDto(productToCreate);
         BDDMockito.given(productRepository.findByArticle(anyString()))
                 .willReturn(null);
         BDDMockito.given(productRepository.save(any(Product.class)))
@@ -49,9 +49,9 @@ class ProductServiceTest {
                 .willReturn(DataUtils.getProductReadDtoTest1());*/
 
         //when
-        ProductReadDto savedProduct = productService.create(productDtoToSave);
+        ProductReadDto createdProduct = productService.create(productDtoToCreate);
         //then
-        assertThat(savedProduct).isNotNull();
+        assertThat(createdProduct).isNotNull();
         //assertEquals(productDtoToSave.name(), savedProduct.name());
     }
 }

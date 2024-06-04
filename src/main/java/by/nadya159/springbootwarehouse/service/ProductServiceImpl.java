@@ -2,8 +2,10 @@ package by.nadya159.springbootwarehouse.service;
 
 import by.nadya159.springbootwarehouse.dto.ProductCreateDto;
 import by.nadya159.springbootwarehouse.dto.ProductEditDto;
-import by.nadya159.springbootwarehouse.exception.NotFoundElementException;
 import by.nadya159.springbootwarehouse.dto.ProductReadDto;
+import by.nadya159.springbootwarehouse.entity.Product;
+import by.nadya159.springbootwarehouse.exception.NotFoundElementException;
+import by.nadya159.springbootwarehouse.exception.ProductWithDuplicateArticleException;
 import by.nadya159.springbootwarehouse.mapper.ProductMapper;
 import by.nadya159.springbootwarehouse.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
@@ -56,8 +58,13 @@ public class ProductServiceImpl implements ProductService {
      */
     @Transactional
     public ProductReadDto create(ProductCreateDto productDto) {
-        return productMapper.toProductReadDto(productRepository.save
-                (productMapper.toProduct(productDto)));
+        Product maybeProduct = productRepository.findByArticle(productDto.article());
+        if (maybeProduct != null) {
+            throw new ProductWithDuplicateArticleException("Product with article='%s' already exists"
+                    .formatted(productDto.article()));
+        } else
+            return productMapper.toProductReadDto(productRepository.save
+                    (productMapper.toProduct(productDto)));
     }
 
     /**

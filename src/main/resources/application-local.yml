@@ -1,3 +1,6 @@
+server:
+  port: 8787
+
 logging:
   level:
     root: info
@@ -5,6 +8,8 @@ logging:
     name: warehouseApp.log
 
 spring:
+  application:
+    name: "SimpleCrudApp"
   datasource:
     url: jdbc:postgresql://localhost:5432/warehouse
     username: postgres
