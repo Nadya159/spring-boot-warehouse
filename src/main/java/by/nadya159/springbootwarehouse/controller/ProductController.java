@@ -3,10 +3,11 @@ package by.nadya159.springbootwarehouse.controller;
 import by.nadya159.springbootwarehouse.dto.ErrorResponseDto;
 import by.nadya159.springbootwarehouse.dto.ProductCreateDto;
 import by.nadya159.springbootwarehouse.dto.ProductEditDto;
-import by.nadya159.springbootwarehouse.dto.ProductReadDto;
+import by.nadya159.springbootwarehouse.dto.ProductResponseDto;
 import by.nadya159.springbootwarehouse.exception.NotFoundElementException;
 import by.nadya159.springbootwarehouse.exception.ProductWithDuplicateArticleException;
-import by.nadya159.springbootwarehouse.service.ProductServiceImpl;
+import by.nadya159.springbootwarehouse.mapper.ProductMapper;
+import by.nadya159.springbootwarehouse.service.impl.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +28,15 @@ import java.util.UUID;
 public class ProductController {
 
     private final ProductServiceImpl productService;
+    private final ProductMapper productMapper;
 
     /**
      * Endpoint получения всех товаров
      *
-     * @return ResponseEntity, содержащий список товаров {@link ProductReadDto}
+     * @return ResponseEntity, содержащий список товаров {@link ProductResponseDto}
      */
     @GetMapping("/all")
-    public ResponseEntity<List<ProductReadDto>> getAll(Pageable pageable) {
+    public ResponseEntity<List<ProductResponseDto>> getAll(Pageable pageable) {
         return ResponseEntity.ok(productService.findAll(pageable));
     }
 
@@ -42,7 +44,7 @@ public class ProductController {
      * Endpoint для получения товара по идентификатору (UUID)
      *
      * @param id идентификатор (UUID) товара
-     * @return ResponseEntity, содержащий {@link ProductReadDto}, т.е. найденный товар
+     * @return ResponseEntity, содержащий {@link ProductResponseDto}, т.е. найденный товар
      * @throws NotFoundElementException исключение, если товар с заданным ID (UUID) не найден
      */
     @GetMapping("/{id}")
@@ -63,16 +65,16 @@ public class ProductController {
     /**
      * Endpoint для создания нового товара
      *
-     * @param product {@link ProductCreateDto} объект с данными для создания товара
-     * @return ResponseEntity, содержащий {@link ProductReadDto}, т.е. сохраненный товар
+     * @param productCreateDto {@link ProductCreateDto} объект с данными для создания товара
+     * @return ResponseEntity, содержащий {@link ProductResponseDto}, т.е. сохраненный товар
      * @throws ProductWithDuplicateArticleException исключение, если товар с таким же артиклем уже есть в БД
      */
     @PostMapping
     public ResponseEntity<?> create(@RequestBody
                                     @Validated
-                                    ProductCreateDto product) {
+                                    ProductCreateDto productCreateDto) {
         try {
-            return ResponseEntity.ok(productService.create(product));
+            return ResponseEntity.ok(productService.create(productMapper.toProductDto(productCreateDto)));
         } catch (ProductWithDuplicateArticleException e) {
             return ResponseEntity.badRequest()
                     .body(ErrorResponseDto.builder()
@@ -88,7 +90,7 @@ public class ProductController {
      *
      * @param id      идентификатор обновляемого продукта
      * @param product {@link ProductCreateDto} объект с данными для обновления товара
-     * @return ResponseEntity, содержащий {@link ProductReadDto}, т.е. обновленный товар
+     * @return ResponseEntity, содержащий {@link ProductResponseDto}, т.е. обновленный товар
      * @throws NotFoundElementException исключение, если товар с заданным ID (UUID) не найден
      */
     @PatchMapping("/{id}")
